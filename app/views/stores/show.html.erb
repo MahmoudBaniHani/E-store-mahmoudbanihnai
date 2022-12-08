@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+<div class="card">
+  <div class="card-header">
+    <center>Store Information</center>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><strong>Name Store: </strong><%= @store.store_name %></h5>
+  </div>
+</div>
+<div>
+  <%= link_to "Edit this books", edit_store_path(@store) %> |
+  <%= link_to "Back to Book", stores_path %>
+  <br><br>
+  <%= button_to "Destroy this Store", @store, method: :delete,class:"btn btn-danger" %>
+</div>
+

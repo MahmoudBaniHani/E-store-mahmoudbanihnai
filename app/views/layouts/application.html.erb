@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EStore</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body class="sb-nav-fixed">
+
+  <% if current_user %>
+      <% if current_user.admin? || current_user.owner? %>
+            <%= render 'layouts/admin_nav' %>
+            <div class="container" style="margin-left: 270px; margin-top: 90px;">
+                <%= yield %>
+            </div>
+      <% else %>
+            <%= render 'layouts/header' %>
+            <div class="container" style="margin-left: 270px; margin-top: 90px;">
+                <%= yield %>
+            </div>
+      <% end %>
+  <% else %>
+      <%= render 'layouts/header' %>
+      <div class="container">
+        <br><br><br>
+        <%= yield %>
+      </div>
+  <% end %>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+  </body>
+</html>

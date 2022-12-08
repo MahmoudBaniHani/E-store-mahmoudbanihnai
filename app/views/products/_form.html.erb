@@ -1,0 +1,68 @@
+<%= form_with(model: @product) do |form| %>
+  <% if @product.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% @product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Product Name</label>
+      <%= form.text_field :product_name ,class:"form-control",placeholder:"Product Name"%>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Description</label>
+      <%= form.text_area :description ,class:"form-control" ,id:"inputPassword4" ,placeholder:"Description"%>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Price</label>
+      <%= form.number_field :price ,class:"form-control",placeholder:"price"%>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Production Date</label>
+      <%= form.date_field :production_date ,class:"form-control" ,id:"inputPassword4" ,placeholder:"Description"%>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">exp Date</label>
+      <%= form.date_field :exp_date ,class:"form-control" ,id:"inputPassword4" ,placeholder:"Description"%>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Quantity</label>
+      <%= form.number_field :quantity ,class:"form-control",placeholder:"quantity"%>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Image</label>
+      <%= form.file_field  :image,class:"form-control" ,id:"inputPassword4" ,placeholder:"Image"%>
+    </div>
+    <div class="form-group col-md-6">
+      <br>
+      <label for="inputEmail4">Category Name</label>
+      <% category_array = Category.all.map { |cat| [cat.category_name, cat.id] } %>
+      <%= form.select :category_id, category_array,selected: "CHI", class:"form-control"  %>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <br>
+      <label for="inputEmail4">Store Name</label>
+      <% store_array = Store.all.map { |store| [store.store_name, store.id] } %>
+      <%= form.select :store_id, store_array, selected: "CHI" ,class:"form-control" %>
+    </div>
+    <div class="form-group col-md-6">
+      <br>
+      <%= form.submit class:"form-control btn btn-success"%>
+    </div>
+  </div>
+
+<% end %>
