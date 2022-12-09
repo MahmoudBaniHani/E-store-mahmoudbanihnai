@@ -1,0 +1,131 @@
+<!--<div id="cart-item">-->
+  <%#= render 'cart_items' %>
+<!--</div>-->
+
+<!--<hr>-->
+
+
+<!--<h1><%#= button_to 'Checkout',check_out_path(@order_items),method: :post %></h1>-->
+<%# @order_items.each do |item| %>
+<!--  <h3><%#= item.product.product_name %></h3>-->
+<!--  <h3><%#= item.product.price %></h3>-->
+  <%#= form_with  model: item do |f|%>
+    <%#= f.hidden_field :product_id, value: item.product.id %>
+    <%#= f.number_field :quantity, value: item.quantity.to_i %>
+    <%#= f.submit 'Update Cart' %>
+    <%# link_to 'Remove items',item,method: :delete,remote: true %>
+  <%# end %>
+<!--  <h2>subTotal <%#= item.total %></h2>-->
+<%# end %>
+
+<!--<h3>Your current order has a total of : <%#= current_order.subtotal %></h3>-->
+
+<% if current_order.order_items.size > 0 %>
+  <section class="h-100 gradient-custom">
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center my-4">
+        <div class="col-md-8">
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Cart - <%= current_order.order_items.size %> items</h5>
+            </div>
+            <div class="card-body">
+              <% @order_items.each do |item| %>
+                <div class="row">
+                  <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                    <!-- Image -->
+                    <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                      <%= image_tag(item.product.image,class:"card-img-top") if item.product.image.attached? %>
+                      <a href="#!">
+                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                    <!-- Data -->
+                    <p><strong><%= item.product.product_name %></strong></p>
+                    <p>price: $<%= item.product.price %></p>
+                    <p>Store Name: <%= item.product.store.store_name %></p>
+                    <%= button_to "Remove item", item, method: :delete,class:"btn btn btn-danger"%>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                    <!-- Quantity -->
+                    <%= form_for item, remote: true do |f| %>
+                          <div class="d-flex mb-4" style="max-width: 300px">
+                            <button class="btn btn-primary px-3 me-2"
+                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                              <i class="fas fa-minus"></i>
+                            </button>
+
+                            <div class="form-outline">
+                              <%= f.number_field :quantity, value: item.quantity, class: "form-control", min: 1 ,id:"form1" %>
+                              <label class="form-label" for="form1">Quantity</label>
+                            </div>
+                            <button class="btn btn-primary px-3 ms-2"
+                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                              <i class="fas fa-plus"></i>
+                            </button>
+
+                          </div>
+
+                          <!-- Quantity -->
+                    <p class="text-start text-md-center">
+                      <%= f.submit "Update Cart", class: "btn btn-outline-primary" %>
+                    </p>
+                    <% end %>
+                  </div>
+                </div>
+                <hr class="my-4" />
+              <% end %>
+            </div>
+          </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <p><strong>Expected shipping delivery</strong></p>
+              <p class="mb-0">12.10.2020 - 14.10.2020</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Summary</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                  Products
+                  <span><%= current_order.subtotal %></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  Shipping
+                  <span>Gratis</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div>
+                    <strong>Total amount</strong>
+                    <strong>
+                      <p class="mb-0">(including VAT)</p>
+                    </strong>
+                  </div>
+                  <span><strong><%= current_order.subtotal %></strong></span>
+                </li>
+              </ul>
+<!--                Go to checkout-->
+                <%= button_to 'Checkout',check_out_path,method: :post ,class:"btn btn-primary btn-lg btn-block"%></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% else %>
+    <p class="text-center">
+      There are no items in your shopping cart. Please
+      <%= link_to "go back",root_path %> and add some items to your cart.
+    </p>
+<% end %>
