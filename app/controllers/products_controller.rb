@@ -12,15 +12,11 @@ class ProductsController < ApplicationController
     if current_user.admin?
         @products = Product.all
     elsif current_user.owner?
-      @store = Store.joins(:users).where(users: { id: @currentUser })
-      puts "ssssssssssssssssssssssssssssssssss",@store.ids
-      # @products = Store.find(@store.ids).product
-      # @products = Store.find(params[:id]).products
+      @products = Product.all
     elsif current_user.customer?
       @products = Product.all
-
     end
-    @products = Product.all
+
   end
 
   # GET /products/1 or /products/1.json
