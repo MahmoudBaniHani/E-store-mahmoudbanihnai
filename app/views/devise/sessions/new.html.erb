@@ -28,7 +28,12 @@
           <br>
           <%= f.submit "Sign in",class:"btn btn-primary btn-block mb-4"%>
         <% end %>
+        <div class="card-footer text-center py-3">
+          <%= link_to "Need an account? Sign up!",new_customer_path, :method=>'get', class: "btn btn-outline-primary mx-1", role: "button" %>
+          <%=link_to "Sign up owner" ,new_user_registration_path,class: "btn btn-outline-primary mx-1", role: "button"  %>
+        </div>
       </div>
+
     </div>
   </div>
 </section>

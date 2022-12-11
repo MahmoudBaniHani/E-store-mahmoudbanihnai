@@ -10,11 +10,12 @@ class ProductsController < ApplicationController
   # GET /products or /products.json
   def index
     if current_user.admin?
-      @products = Product.all
+        @products = Product.all
     elsif current_user.owner?
-      # @products = Product.joins(:store)
-      @products = Product.joins(:store)
-      # render json: {status:'success',message:'hello',location: @products} ,status: :ok
+      @store = Store.joins(:users).where(users: { id: @currentUser })
+      puts "ssssssssssssssssssssssssssssssssss",@store.ids
+      # @products = Store.find(@store.ids).product
+      # @products = Store.find(params[:id]).products
     elsif current_user.customer?
       @products = Product.all
 
@@ -74,6 +75,7 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.

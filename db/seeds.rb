@@ -9,7 +9,7 @@ cat = Category.create(category_name:'electronic')
 cat.save
 
 Product.delete_all
-100.times do
+50.times do
   p=Product.create(product_name:Faker::Commerce.unique.product_name,
                    price: Faker::Number.between(from: 1, to: 500),
                    description: Faker::Hipster.sentence(),

@@ -11,8 +11,8 @@ class Product < ApplicationRecord
   validate :exp_date_after_product_date
   validates :quantity ,:numericality => {greater_than_or_equal_to: 0 }
 
-  scope :lower_price ,->{ where(:price =>minimum(:price))  }
-  scope :high_price ,->{ where(:price =>maximum(:price))  }
+  scope :lower_price ,->{ Product.order(price: :asc)  }
+  scope :high_price ,->{ Product.order(price: :desc) }
 
 
   private

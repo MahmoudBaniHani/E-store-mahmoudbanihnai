@@ -1,6 +1,6 @@
 <p style="color: green"><%= notice %></p>
 <br>
-<%= link_to 'New User' ,new_user_url(@user) %>
+<%= link_to 'New User' ,new_user_path %>
 <br><br>
 <table class="table">
   <thead class="thead-dark">
@@ -15,15 +15,15 @@
   </thead>
   <tbody>
   <% if @users %>
-    <% @users.each do |user| %>
+    <% @users.each do |row| %>
       <tr>
-        <td><%= user.id %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.email %></td>
-        <td><%= link_to 'show' ,show_user_path(user) %></td>
-        <td><%= link_to 'edit' ,edit_user_path %></td>
-        <td><%= button_to 'Destroy',user ,method: :delete ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },class: "btn btn-danger ml-3" %> </td>
+        <td><%= row.id %></td>
+        <td><%= row.first_name %></td>
+        <td><%= row.last_name %></td>
+        <td><%= row.email %></td>
+        <td><%= link_to 'show' ,user_path(row) %></td>
+        <td><%= link_to 'Edit' ,edit_user_path(row.id) %></td>
+        <td><%= button_to 'Destroy',row ,method: :delete ,data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },class: "btn btn-danger ml-3" %> </td>
       </tr>
     <% end %>
   <% end %>

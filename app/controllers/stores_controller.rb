@@ -2,7 +2,7 @@ class StoresController < ApplicationController
   before_action :set_store, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
   before_action :only => [:new, :edit,:index,:show,:create,:destroy,:update] do
-    redirect_to new_user_session_path unless current_user.admin? || current_user.owner?
+    redirect_to new_user_session_path unless current_user.admin? or current_user.owner?
   end
   before_action :set_user, only: %i[ create index update]
 

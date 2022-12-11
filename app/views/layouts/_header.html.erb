@@ -8,9 +8,16 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <% @cat.each do |cat| %>
-              <li><a class="dropdown-item" href="#!"><%= cat.category_name %></a></li>
-
+              <% @cat.each do |cat| %>
+                <li><%= link_to cat.category_name,page_path(cat) %></li>
+              <% end %>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdownStore" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Store</a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownStore">
+            <% @store.each do |store| %>
+              <li><%= link_to store.store_name,show_product_owner_path(id:store) %></li>
             <% end %>
           </ul>
         </li>

@@ -28,10 +28,10 @@
         </a>
         <div class="collapse" id="collapseUser" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
           <nav class="sb-sidenav-menu-nested nav">
-            <a class="nav-link" href="/users/index">All User</a>
-            <a class="nav-link" href="/stores/new">Add User</a>
-            <a class="nav-link" href="/stores">Edit User</a>
-            <a class="nav-link" href="/stores">Delete User</a>
+            <a class="nav-link" href="/users">All User</a>
+            <a class="nav-link" href="/users/new">Add User</a>
+            <a class="nav-link" href="/users">Edit User</a>
+            <a class="nav-link" href="/users">Delete User</a>
           </nav>
         </div>
       <% end %>
@@ -55,6 +55,7 @@
       </a>
       <div class="collapse" id="collapseproduct" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
         <nav class="sb-sidenav-menu-nested nav">
+          <%= link_to 'all product',show_product_in_owner_path %>
           <a class="nav-link" href="/products">All Product</a>
           <a class="nav-link" href="/products/new">Add Product</a>
           <a class="nav-link" href="/products">Edit Product</a>
