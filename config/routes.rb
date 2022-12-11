@@ -14,4 +14,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :pages
   post 'carts/check_out' ,to: 'carts#check_out', as: 'check_out'
+  get 'search', to: 'pages#search'
+  get 'sort_by_price', to: 'pages#sort_price'
+  get 'sort_high_price', to: 'pages#high_price'
 end

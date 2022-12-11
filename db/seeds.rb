@@ -11,9 +11,9 @@ cat.save
 Product.delete_all
 100.times do
   p=Product.create(product_name:Faker::Commerce.unique.product_name,
-                   price: Faker::Number.between(from: 1, to: 1000),
+                   price: Faker::Number.between(from: 1, to: 500),
                    description: Faker::Hipster.sentence(),
-                   store_id:1,
+                   store_id: 1,
                    production_date:Faker::Date.between(from: '2014-09-23', to: '2014-09-25'),
                    exp_date:Faker::Date.between(from: '2020-09-23', to: '2022-09-25') ,
                    quantity:Faker::Number.between(from: 1, to: 50))

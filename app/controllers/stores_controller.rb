@@ -1,10 +1,11 @@
 class StoresController < ApplicationController
   before_action :set_store, only: %i[ show edit update destroy ]
-  before_action :set_user, only: %i[ create index update]
   before_action :authenticate_user!
   before_action :only => [:new, :edit,:index,:show,:create,:destroy,:update] do
     redirect_to new_user_session_path unless current_user.admin? || current_user.owner?
   end
+  before_action :set_user, only: %i[ create index update]
+
 
   # GET /stores or /stores.json
   def index
@@ -62,7 +63,6 @@ class StoresController < ApplicationController
   # DELETE /stores/1 or /stores/1.json
   def destroy
     @store.destroy
-
     respond_to do |format|
       format.html { redirect_to stores_url, notice: "Store was successfully destroyed." }
       format.json { head :no_content }

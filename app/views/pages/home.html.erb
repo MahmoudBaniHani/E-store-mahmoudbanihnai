@@ -12,7 +12,18 @@
   <% end %>
 <% else %>
     <% if @products %>
-      <section class="py-5">
+    <div class="row-cols-1">
+      <h1>Sort By:</h1>
+      <%= form_tag(sort_by_price_path, method: "get", remote: true) do %>
+        <%= submit_tag "Lower Price", class:'btn btn-dark', id:'search_submit'%>
+      <% end %>
+      <%= form_tag(sort_high_price_path, method: "get", remote: true) do %>
+        <%= submit_tag "High Price", class:'btn btn-dark', id:'search_submit'%>
+      <% end %>
+      <%#= button_to 'Price',sort_by_price_path ,method: :get,class:"btn btn-primary" %>
+    </div>
+        <%= render 'pages/search' %>
+      <section class="py-5" >
         <div class="container px-4 px-lg-5 mt-5">
           <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <%= render 'pages/product'%>
@@ -21,3 +32,5 @@
       </section>
     <% end %>
 <% end %>
+
+

@@ -4,10 +4,16 @@ class CartsController < ApplicationController
   end
   def check_out
     puts "check out"
-    @order = current_order
-    @order.status = 1
-    @order.save
-    reset_session
-    redirect_to root_path
+    if user_signed_in?
+      @order = current_order
+      @order.status = 1
+      @order.user_id = current_user.id
+      @order.save
+      reset_session
+      redirect_to root_path
+    else
+      redirect_to new_user_session_path
+    end
+
   end
 end

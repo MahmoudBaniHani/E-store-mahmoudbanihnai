@@ -1,11 +1,12 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
-  before_action :set_category, only: %i[ update create ]
-  before_action :set_user, only: %i[ create index]
   before_action :authenticate_user!
   before_action :only => [:new, :edit,:index,:show,:create,:destroy,:update] do
     redirect_to new_user_session_path unless current_user.admin? || current_user.owner?
   end
+  before_action :set_category, only: %i[ update create ]
+  before_action :set_user, only: %i[ create index]
+
   # GET /products or /products.json
   def index
     if current_user.admin?
