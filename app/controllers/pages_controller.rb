@@ -43,10 +43,9 @@ class PagesController < ApplicationController
   end
   def show_store_product
     @store = Store.joins(:users).where(users: { id: @currentUser })
-    @products = Store.find(@store.ids).product
+    @products = Store.find(2).products
   end
   def product_of_owner
-    puts "dsmlksnjkdbsjds",params[:id]
     @products = Store.find(params[:id]).products
     render 'pages/show_store_product'
   end

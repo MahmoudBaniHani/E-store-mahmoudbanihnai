@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-
   get 'carts/show'
-
   # get 'users/index' ,as:'all_users'
   # get 'users/new' ,as:'new_user'
   # get 'users/show/:id' ,as:'show_user_admin'
@@ -11,8 +9,7 @@ Rails.application.routes.draw do
   # delete 'users/:id', to: 'users#destroy' ,as:'destroy_users_admin'
   # ,controllers: { registrations: "users/registrations" }
   devise_for :users
-
-
+  post 'create_user' => 'users#create', as: :create_user
   resources :users
   resources :orders
   resources :products

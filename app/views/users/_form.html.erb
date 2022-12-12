@@ -1,4 +1,5 @@
-<%= form_with(model: @user ) do |form| %>
+<%#= form_with(model: @user ) do |form| %>
+  <%= form_for User.new, url: create_user_path do |form| %>
   <% if @user.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this users from being saved:</h2>
@@ -23,20 +24,22 @@
       <label for="inputEmail4">Email</label>
       <%= form.text_field :email ,class:"form-control",placeholder:"Email"%>
     </div>
-    <div class="form-outline mb-3">
+    <div class="form-group col-md-6">
       <label class="form-label" for="form3Example4">Password</label>
       <% if @minimum_password_length %>
         <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %><br/>
-      <%= form.password_field :password, autocomplete: "new-password",placeholder:"Enter Password Confirmation",class:"form-control form-control-lg" %>
+      <%= form.text_field :password, autocomplete: "new-password",placeholder:"Enter Password Confirmation",class:"form-control" %>
     </div>
-    <div class="field">
-      <%= form.label :role %>
-      <%= form.select :role, User.roles.keys[1..2]  %>
-    </div>
-  </div>
 
+  </div>
+  <br>
+  <div class="field">
+    <%= form.label :role %>
+    <%= form.select :role, User.roles.keys[1..2]  %>
+  </div>
   <div class="form-row">
+
     <div class="form-group col-md-6">
       <br>
       <%= form.submit class:"form-control btn btn-success"%>
