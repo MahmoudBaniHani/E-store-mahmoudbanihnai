@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   belongs_to :store
   has_and_belongs_to_many :categories
   has_many :order_items
+  belongs_to :user
 
   has_one_attached :image
 

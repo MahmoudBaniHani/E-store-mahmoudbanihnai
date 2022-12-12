@@ -16,7 +16,8 @@ Product.delete_all
                    store_id: 1,
                    production_date:Faker::Date.between(from: '2014-09-23', to: '2014-09-25'),
                    exp_date:Faker::Date.between(from: '2020-09-23', to: '2022-09-25') ,
-                   quantity:Faker::Number.between(from: 1, to: 50))
+                   quantity:Faker::Number.between(from: 1, to: 50),
+                    user_id:admin.id)
   p.categories << cat
   p.image.attach(
     io:  File.open(File.join(Rails.root,'app/assets/images/no-image.png')),

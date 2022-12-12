@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
     if current_user.admin?
         @products = Product.all
     elsif current_user.owner?
-      @products = Product.all
+      @products = Product.all.where(:user_id => current_user.id)
     elsif current_user.customer?
       @products = Product.all
     end
@@ -35,9 +35,11 @@ class ProductsController < ApplicationController
   # POST /products or /products.json
   def create
     @product = Product.new(product_params)
+    @product.user  = @user
     respond_to do |format|
       if @product.save
         @product.categories << @category
+
         format.html { redirect_to product_url(@product), notice: "Product was successfully created." }
         format.json { render :show, status: :created, location: @product }
       else
