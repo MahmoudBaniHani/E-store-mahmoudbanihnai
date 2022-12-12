@@ -12,7 +12,7 @@ class StoresController < ApplicationController
     if current_user.admin?
       @stores = Store.all
     else
-      @stores= Store.joins(:users).where(users: { id: @currentUser })
+      @stores = Store.joins(:users).where(users: { id: @currentUser })
     end
   end
 

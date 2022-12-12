@@ -2,7 +2,12 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    if current_user.admin?
+      @orders = Order.all
+    elsif current_user.owner?
+      @orders = Order.all
+    end
+
   end
 
   # GET /orders/1 or /orders/1.json

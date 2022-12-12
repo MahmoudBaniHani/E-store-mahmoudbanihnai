@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
   get 'carts/show'
-  # get 'users/index' ,as:'all_users'
-  # get 'users/new' ,as:'new_user'
-  # get 'users/show/:id' ,as:'show_user_admin'
-  # put 'users/edit' ,as:'edit_user_admin'
-  # get 'users/new' ,as:'new_user_admin'
-  # delete 'users/destroy/:id' ,as:'destroy_users_admin'
-  # delete 'users/:id', to: 'users#destroy' ,as:'destroy_users_admin'
-  # ,controllers: { registrations: "users/registrations" }
   devise_for :users
   post 'create_user' => 'users#create', as: :create_user
   resources :users
@@ -31,6 +23,7 @@ Rails.application.routes.draw do
   get 'product_of_owner',to: 'pages#product_of_owner'
   get 'show_cat_info/:id',as: 'category_info' ,to:'pages#category_info_show'
 
+  get 'purchase_order',to:'pages#purchase_order'
 
   devise_scope :user do
     get "/new_customer" => "users/registrations#new_customer"

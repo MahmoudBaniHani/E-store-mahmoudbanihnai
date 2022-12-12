@@ -49,7 +49,10 @@ class PagesController < ApplicationController
     @products = Store.find(params[:id]).products
     render 'pages/show_store_product'
   end
-
+  def purchase_order
+    @order_by_item = Order.all
+    @stores = Store.joins(:users).where(users: { id: current_user.id })
+  end
   private
   def set_order_items
     @order_item = current_order.order_items.new

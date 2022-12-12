@@ -1,0 +1,41 @@
+<p style="color: green"><%= notice %></p>
+
+<br><br>
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th>order Id</th>
+    <th>Name Product</th>
+    <th>Price Item</th>
+    <th>Email</th>
+    <th>Date</th>
+    <th>Quantity</th>
+    <th>Store Name</th>
+  </tr>
+  </thead>
+  <tbody>
+          <% @stores.each do |store| %>
+            <% if current_user.id = store.user_ids %>
+              <% @order_by_item.each do |order| %>
+                <% order.order_items.each do |order_item| %>
+                  <% if order_item.product.store.id = store.id %>
+                      <tr>
+                          <td><%= order.id %></td>
+                          <td><%= order_item.product.product_name %></td>
+                          <td><%= order_item.product.price %></td>
+                          <td><%= order.user.email %></td>
+                          <td><%= order.updated_at %></td>
+                          <td><%= order_item.quantity %></td>
+                          <td><%= store.store_name %></td>
+                      </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+  </tbody>
+</table>
+
+
+
+
