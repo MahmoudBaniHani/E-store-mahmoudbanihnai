@@ -31,12 +31,6 @@ class OrderItemsController < ApplicationController
     puts "order id destroy",params[:id]
     @order_item = @order.order_items.find(params[:id])
     @order_item.destroy
-    # @order_items = current_order.order_items
-    # puts params[:id]
-    # @order = current_order
-    # @order_item = @order.order_items.find_by(params[:id])
-    # @order_item.destroy
-    # @order_items = current_order.order_items
     redirect_to carts_show_path
   end
   private
