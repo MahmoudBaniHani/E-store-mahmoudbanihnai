@@ -50,7 +50,7 @@ class PagesController < ApplicationController
     render 'pages/show_store_product'
   end
   def purchase_order
-    @order_by_item = Order.all
+    @order_by_item = Order.all.where(:status => 1)
     @stores = Store.joins(:users).where(users: { id: current_user.id })
   end
   private

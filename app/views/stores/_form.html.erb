@@ -21,8 +21,8 @@
     </div>
     <div class="col">
       <%= form.label :status, style: "display: block" %>
-      <%= form.text_field :status,class:"form-control"%>
-
+      <%#= form.text_field :status, class:"form-control"%>
+      <%= form.select(:status, @status_array) %>
     </div>
     <div class="col">
       <br>

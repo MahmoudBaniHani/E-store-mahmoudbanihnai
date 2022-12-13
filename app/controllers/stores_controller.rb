@@ -22,6 +22,7 @@ class StoresController < ApplicationController
 
   # GET /stores/new
   def new
+    @status_array = Store.statuses.keys.map { |status| [status.titleize, status] }
     @store = Store.new
   end
 
