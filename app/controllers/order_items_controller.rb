@@ -14,10 +14,9 @@ class OrderItemsController < ApplicationController
       @order.order_items.new(order_params) do
         @order.status = 0
       end
+      @order.save
+      session[:order_id] = @order.id
     end
-    # @order_item = @order.order_items.new(order_params)
-    @order.save
-    session[:order_id] = @order.id
     redirect_to root_path
   end
 
@@ -38,7 +37,7 @@ class OrderItemsController < ApplicationController
     # @order_item = @order.order_items.find_by(params[:id])
     # @order_item.destroy
     # @order_items = current_order.order_items
-    redirect_to root_path
+    redirect_to carts_show_path
   end
   private
   def order_params
