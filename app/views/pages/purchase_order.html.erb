@@ -1,41 +1,45 @@
-<p style="color: green"><%= notice %></p>
+<div class="container-fluid px-4">
+    <div class="card mb-4">
+          <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+                Purchase Order
+          </div>
+          <div class="card-body">
+                <table id="order_items_datatable" class="dataTable-table" >
+                      <thead>
+                          <tr style="border-color: inherit;border-style: solid;border-width: 0;">
+                              <th>Id</th>
+                              <th>order id</th>
+                              <th>Email Customer</th>
+                              <th>Product Name</th>
+                              <th>Price Item</th>
+                              <th>Quantity</th>
+                              <th>Total</th>
+                              <th>Store Name</th>
+                          </tr>
+                      </thead>
+                </table>
+          </div>
+  </div>
+</div>
 
-<br><br>
-<table class="table">
-  <thead class="thead-dark">
-  <tr>
-    <th>order Id</th>
-    <th>Name Product</th>
-    <th>Price Item</th>
-    <th>Email</th>
-    <th>Date</th>
-    <th>Quantity</th>
-    <th>Store Name</th>
-  </tr>
-  </thead>
-  <tbody>
-          <% @stores.each do |store| %>
-            <% if current_user.id = store.user_ids %>
-              <% @order_by_item.each do |order| %>
-                <% order.order_items.each do |order_item| %>
-                  <% if order_item.product.store.id = store.id %>
-                      <tr>
-                          <td><%= order.id %></td>
-                          <td><%= order_item.product.product_name %></td>
-                          <td><%= order_item.product.price %></td>
-                          <td><%= order.user.email %></td>
-                          <td><%= order.updated_at %></td>
-                          <td><%= order_item.quantity %></td>
-                          <td><%= store.store_name %></td>
-                      </tr>
-                  <% end %>
-                <% end %>
-              <% end %>
-            <% end %>
-          <% end %>
-  </tbody>
-</table>
-
-
-
-
+<script type="text/javascript">
+    jQuery('#order_items_datatable').dataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": $('#order_items_datatable').data('source')
+        },
+        "pagingType": "full_numbers",
+        "columns": [
+            {"data": "id"},
+            {"data": "order_id"},
+            {"data": "user_email"},
+            {"data": "product_name"},
+            {"data": "unit_price"},
+            {"data": "quantity"},
+            {"data": "total"},
+            {"data": "store_name"},
+        ]
+    });
+</script>

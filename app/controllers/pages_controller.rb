@@ -3,7 +3,7 @@ class PagesController < ApplicationController
   before_action :set_category
   before_action :set_store
   def home
-    @products = Product.all.limit(5)
+    @products = Product.all.limit(rand(20))
     # @order_item = current_order.order_items.new
   end
   def about
@@ -50,8 +50,12 @@ class PagesController < ApplicationController
     render 'pages/show_store_product'
   end
   def purchase_order
-    @order_by_item = Order.all.where(:status => 1)
-    @stores = Store.joins(:users).where(users: { id: current_user.id })
+    # @order_by_item = Order.all.where(:status => 1)
+    # @stores = Store.joins(:users).where(users: { id: current_user.id })
+      respond_to do |format|
+        format.html
+        format.json { render json: OrderItemDatatable.new(params, {current_user: current_user}) }
+      end
   end
   private
   def set_order_items
