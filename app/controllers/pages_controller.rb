@@ -2,43 +2,39 @@ class PagesController < ApplicationController
   before_action :set_order_items
   before_action :set_category
   before_action :set_store
+  before_action :authenticate_user!
+  before_action :only => [:upload] do
+    redirect_to new_user_session_path unless current_user.admin?
+  end
   def home
-    @products = Product.all.limit(rand(20))
-    # @order_item = current_order.order_items.new
+    # @products = Product.paginate(:page =>params[:page],per_page: 12)
   end
   def about
   end
+  def dashboard_admin
+  end
+  def upload
+  end
   def search
-    puts "#{params[:search]}"
-    query = params[:search]
-    results = Product.where('product_name LIKE ?', "#{query}%")
-    puts params[:filter]
-    @products = results
-
+    @products = Product.where('product_name LIKE ?', "#{params[:search]}%").paginate(:page =>params[:page],per_page: 12)
     render 'pages/home'
   end
   def sort_price
-    puts "sort_by_price"
-    @products  = Product.lower_price
-    # redirect_to root_path
-    puts @product
+    @products  = Product.lower_price.paginate(:page =>params[:page],per_page: 12)
     render 'pages/home'
   end
   def high_price
-    puts "high_price"
-    @products  = Product.high_price
+    @products  = Product.high_price.paginate(:page =>params[:page],per_page: 12)
     render 'pages/home'
   end
   def show
-    @products = Category.find(params[:id]).products
-    render 'pages/home'
   end
   def category_info_show
-    @products = Category.find(params[:id]).products
+    @products = Category.find(params[:id]).products.paginate(:page =>params[:page],per_page: 12)
     render 'pages/home'
   end
   def show_product_owner
-    @products = Store.find(params[:id]).products
+    @products = Store.find(params[:id]).products.paginate(:page =>params[:page],per_page: 12)
     render 'pages/home'
   end
   def show_store_product

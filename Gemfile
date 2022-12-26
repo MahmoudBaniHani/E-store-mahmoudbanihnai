@@ -76,3 +76,5 @@ gem "devise", "~> 4.8"
 gem "ajax-datatables-rails", "~> 1.3"
 
 gem "jquery-datatables", "~> 1.10"
+
+gem "will_paginate", "~> 3.3"

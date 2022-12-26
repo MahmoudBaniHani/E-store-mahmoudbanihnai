@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
   before_action :set_category
   before_action :set_store
-
+  before_action :set_product
 
 
   private
@@ -15,6 +15,9 @@ class ApplicationController < ActionController::Base
   end
   def set_store
     @store = Store.all
+  end
+  def set_product
+    @products = Product.paginate(:page =>params[:page],per_page: 12)
   end
 
 end

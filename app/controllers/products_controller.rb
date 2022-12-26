@@ -9,14 +9,22 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
-    if current_user.admin?
-        @products = Product.all
-    elsif current_user.owner?
-      @products = Product.all.where(:user_id => current_user.id)
-    elsif current_user.customer?
-      @products = Product.all
-    end
-
+    # if current_user.admin?
+    #     @products = Product.all
+    # elsif current_user.owner?
+    #   @products = Product.all.where(:user_id => current_user.id)
+    # elsif current_user.customer?
+    #   @products = Product.all
+    # end
+    case  current_user.role
+      when 'admin'
+        # @products = Product.all
+        @products = Product.all.paginate(:page =>params[:page],per_page: 12)
+      when 'owner'
+        @products = Product.paginate(:page =>params[:page],per_page: 12).where(:user_id => current_user.id)
+      when 'customer'
+        @products = Product.all.paginate(:page =>params[:page],per_page: 12)
+      end
   end
 
   # GET /products/1 or /products/1.json
@@ -73,7 +81,10 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def import
+    Product.import(params[:file])
+    redirect_to products_path ,notice: "Product was successfully imported"
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.

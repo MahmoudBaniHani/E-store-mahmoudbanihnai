@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="navbarDropdownSort" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sort By</a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdownSort">
+        <li class="nav-item">
+          <%= link_to 'Lower Price',sort_by_price_path ,class:"dropdown-item"%>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'High Price',sort_high_price_path ,class:"dropdown-item"%>
+        </li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <% @cat.each do |cate| %>
+          <li><%= link_to cate.category_name,category_info_path(cate) %></li>
+        <% end %>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" id="navbarDropdownStore" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Store</a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdownStore">
+        <% @store.each do |store| %>
+          <li><%= link_to store.store_name,show_product_owner_path(id:store) %></li>
+        <% end %>
+      </ul>
+    </li>
+  </ul>
+  <%= render 'pages/search' %>
+</nav>

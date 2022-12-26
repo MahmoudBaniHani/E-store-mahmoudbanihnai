@@ -1,13 +1,12 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :only => [:new, :edit,:index,:show,:create,:destroy,:update] do
+    redirect_to new_user_session_path unless current_user.admin?
+  end
   # GET /orders or /orders.json
   def index
-    if current_user.admin?
       @orders = Order.all
-    elsif current_user.owner?
-      @orders = Order.all
-    end
-
   end
 
   # GET /orders/1 or /orders/1.json

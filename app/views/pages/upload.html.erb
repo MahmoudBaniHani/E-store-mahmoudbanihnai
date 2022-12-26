@@ -1,0 +1,12 @@
+<div class="row-cols-1">
+  <center>
+    <h1> Upload File Product </h1>
+  </center>
+
+  <p style="color: green"><%= notice %></p>
+  <%= form_tag import_products_path ,  multipart: true  do |form|%>
+    <%= file_field_tag :file  ,class:"form-control form-control-lg" ,accept: 'text/csv'%>
+    <br/>
+    <%= submit_tag  "Import Product" ,class:'btn btn-primary' %>
+  <% end %>
+</div>

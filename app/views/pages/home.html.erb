@@ -1,63 +1,36 @@
 <% if current_user %>
   <% if current_user.customer? %>
       <% if @products %>
-        <section class="py-5">
-          <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-              <%= render 'pages/product'%>
-            </div>
+          <div class="row-cols-1">
+            <%= render 'pages/nav_filter'%>
           </div>
-        </section>
+          <section class="py-5">
+              <div class="container px-4 px-lg-5 mt-5">
+                  <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <%= render 'pages/product'%>
+                  </div>
+                  <div class="apple_pagination">
+                      <%= will_paginate @products,:container => false %>
+                  </div>
+              </div>
+          </section>
       <% end %>
   <% end %>
 <% else %>
     <% if @products %>
-    <div class="row-cols-1">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdownSort" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sort By</a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdownSort">
-                  <li class="nav-item">
-                    <%= link_to 'Lower Price',sort_by_price_path ,class:"dropdown-item"%>
-                  </li>
-                  <li class="nav-item">
-                    <%= link_to 'High Price',sort_high_price_path ,class:"dropdown-item"%>
-                  </li>
-              </ul>
-            </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% @cat.each do |cate| %>
-                <li><%= link_to cate.category_name,category_info_path(cate) %></li>
-              <% end %>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdownStore" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Store</a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownStore">
-              <% @store.each do |store| %>
-                <li><%= link_to store.store_name,show_product_owner_path(id:store) %></li>
-              <% end %>
-            </ul>
-          </li>
-
-        </ul>
-
-        <%= render 'pages/search' %>
-      </nav>
-      <%#= button_to 'Price',sort_by_price_path ,method: :get,class:"btn btn-primary" %>
-    </div>
-
-      <section class="py-5" >
-        <div class="container px-4 px-lg-5 mt-5">
-          <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <%= render 'pages/product'%>
-          </div>
+        <div class="row-cols-1">
+            <%= render 'pages/nav_filter'%>
         </div>
-      </section>
+        <section class="py-5" >
+                <div class="container px-4 px-lg-5 mt-5">
+                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                      <%= render 'pages/product'%>
+                    </div>
+                    <div class="apple_pagination">
+                      <%= will_paginate @products,:container => false %>
+                    </div>
+                </div>
+        </section>
     <% end %>
 <% end %>
 
