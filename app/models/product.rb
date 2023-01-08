@@ -54,7 +54,7 @@ class Product < ApplicationRecord
         #                      filename: rand(1..20).to_s+'.png', content_type: 'image/png')
         product.store_id = row['store_id'].to_i
         product.user_id = row['user_id'].to_i
-        product.save unless store.nil? or user.nil?
+        product.save unless store.nil? and user.nil?
       else
           product_params = {}
           row.each do |key, value|

@@ -2,10 +2,6 @@ class PagesController < ApplicationController
   before_action :set_order_items
   before_action :set_category
   before_action :set_store
-  before_action :authenticate_user!
-  before_action :only => [:upload] do
-    redirect_to new_user_session_path unless current_user.admin?
-  end
   def home
     # @products = Product.paginate(:page =>params[:page],per_page: 12)
   end

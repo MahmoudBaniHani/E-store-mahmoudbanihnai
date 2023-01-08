@@ -5,7 +5,7 @@ class OrderItemDatatable < AjaxDatatablesRails::ActiveRecord
       id: { source: "OrderItem.id", cond: :eq },
       order_id: { source: "OrderItem.order_id", cond: :like },
       user_email: { source: "OrderItem.user_email", cond: :like },
-      product_name: { source: "OrderItem.product_name", cond: :like },
+      product_name: { source: "OrderItem.product_name", cond: :like ,searchable: true },
       unit_price: { source: "OrderItem.unit_price", cond: :like },
       quantity: { source: "OrderItem.quantity", cond: :like },
       total: { source: "OrderItem.total", cond: :like },

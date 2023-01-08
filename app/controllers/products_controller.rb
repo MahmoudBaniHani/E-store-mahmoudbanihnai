@@ -82,8 +82,25 @@ class ProductsController < ApplicationController
     end
   end
   def import
-    Product.import(params[:file])
-    redirect_to products_path ,notice: "Product was successfully imported"
+    # Product.import(params[:file])
+    # redirect_to products_path ,notice: "Product was successfully imported"
+    if params[:file].nil?
+      flash[:error] = "Please select a file to import"
+      redirect_to upload_product_path ,notice: "Please Choose file to Upload" and return
+    end
+    file_path = Rails.root.join('public', 'my_file.csv')
+    CSV.open(file_path, "w",headers: true ) do |csv|
+      csv << %w[product_name description price production_date exp_date quantity store_id user_id category_id]
+      CSV.foreach(params[:file],headers:true ) do |row|
+        csv << [row["product_name"], row["description"],row["price"],row["production_date"],
+                row["exp_date"],row["quantity"],row["store_id"],row["user_id"],row["category_id"]]
+      end
+    end
+    # UploadJob.perform_sync(file_path.to_s)
+    # UploadJob.perform_at(5.second.from_now,file_path.to_s)
+    # UploadJob.perform_at(5.second.from_now,Rails.root.join('public', 'my_file.csv').to_s)
+    UploadcsvJob.perform_later(file_path.to_s)
+    # redirect_to root_path ,notice: "Product was Upload successfully"
   end
 
   private

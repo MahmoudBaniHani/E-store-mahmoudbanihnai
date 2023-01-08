@@ -1,4 +1,7 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
+  # mount Sidekiq::Web =>'/sidekiq'
   root 'pages#home'
   devise_for :users
   devise_scope :user do
@@ -20,7 +23,7 @@ Rails.application.routes.draw do
   get 'upload_product',to:'pages#upload'
   get 'Dashboard',to:'pages#dashboard_admin'
 
-  get 'pages/about'
+  get 'pages/about' ,to: 'pages#about'
   post 'carts/check_out' ,to: 'carts#check_out', as: 'check_out'
   get 'carts/show'
   get 'search', to: 'pages#search'

@@ -1,13 +1,13 @@
-# admin = User.create(email:'admin@gmail.com',password:'123456',role:0,first_name:'Admin',last_name:'admin')
-# admin.save
-#
-# store = Store.create(store_name:'smart-by',phone:'0791481305',status:0)
-# store.users << admin
-# store.save
-#
-# cat = Category.create(category_name:'electronic')
-# cat.save
-#
+admin = User.create(email:'admin@gmail.com',password:'123456',role:0,first_name:'Admin',last_name:'admin')
+admin.save
+
+store = Store.create(store_name:'smart-by',phone:'0791481305',status:0)
+store.users << admin
+store.save
+
+cat = Category.create(category_name:'electronic')
+cat.save
+
 Product.delete_all
 # 50.times do
 #   p=Product.create(product_name:Faker::Commerce.unique.product_name,
